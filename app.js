@@ -72,8 +72,17 @@ let UIController = (function() {
   };
 
   return {
-    clearInput: function () {
-      description = ''
+    clearFields: function () {
+      let fields, fieldsArr;
+      
+      fields = document.querySelectorAll(DOMstrings.inputDescription + ', ' + DOMstrings.inputValue);
+      fieldsArr = Array.prototype.slice.call(fields);
+
+      fieldsArr.forEach(function(current, index, array) {
+        current.value = "";
+      });
+
+      fieldsArr[0].focus();
     },
 
     getInput: function() {
@@ -156,8 +165,7 @@ let controller = (function(budgetCtrl, UICtrl) {
             UICtrl.addListItem(newItem, input.type);
 
             // 4. Clear the fields
-            UICtrl.clearInput(input.description);
-           
+            UICtrl.clearFields();
 
             // 5. Calculate and update budget
            
